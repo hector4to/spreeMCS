@@ -13,6 +13,7 @@ $font-family: 'B612',"florentia", Arial, Tahoma,"Montserrat", sans-serif;
 //$header-font-color: $font-color;
 $header-font-color: red;
 
+
 //$header-background: $primary-background;
 $header-background: #F5CF3A;
 
@@ -51,7 +52,8 @@ $theme-colors: (
   "overlay": rgba(76, 76, 76, 0.5),
   "shadow": rgba(0, 0, 0, 0.16)
 );
-$enable-rounded: false;
+//$enable-rounded: false;
+$enable-rounded:true;
 $enable-shadows: false;
 $enable-gradients: false;
 $font-family-sans-serif: $font-family;
