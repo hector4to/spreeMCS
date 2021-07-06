@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_18_154526) do
+ActiveRecord::Schema.define(version: 2021_06_22_220966) do
 
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -136,6 +136,19 @@ ActiveRecord::Schema.define(version: 2021_06_18_154526) do
     t.index ["position"], name: "index_spree_assets_on_position"
     t.index ["viewable_id"], name: "index_assets_on_viewable_id"
     t.index ["viewable_type", "type"], name: "index_assets_on_viewable_type_and_type"
+  end
+
+  create_table "spree_bookkeeping_documents", force: :cascade do |t|
+    t.string "printable_type"
+    t.integer "printable_id"
+    t.string "template"
+    t.string "number"
+    t.string "firstname"
+    t.string "lastname"
+    t.string "email"
+    t.decimal "total", precision: 12, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "spree_calculators", force: :cascade do |t|
@@ -549,6 +562,14 @@ ActiveRecord::Schema.define(version: 2021_06_18_154526) do
     t.index ["tax_category_id"], name: "index_spree_products_on_tax_category_id"
   end
 
+  create_table "spree_products_stores", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "store_id"
+    t.index ["product_id", "store_id"], name: "index_spree_products_stores_on_product_id_and_store_id", unique: true
+    t.index ["product_id"], name: "index_spree_products_stores_on_product_id"
+    t.index ["store_id"], name: "index_spree_products_stores_on_store_id"
+  end
+
   create_table "spree_products_taxons", force: :cascade do |t|
     t.integer "product_id"
     t.integer "taxon_id"
@@ -610,6 +631,11 @@ ActiveRecord::Schema.define(version: 2021_06_18_154526) do
     t.index ["product_group_id"], name: "index_promotion_rules_on_product_group_id"
     t.index ["promotion_id"], name: "index_spree_promotion_rules_on_promotion_id"
     t.index ["user_id"], name: "index_promotion_rules_on_user_id"
+  end
+
+  create_table "spree_promotion_rules_stores", id: false, force: :cascade do |t|
+    t.integer "promotion_rule_id"
+    t.integer "store_id"
   end
 
   create_table "spree_promotions", force: :cascade do |t|
@@ -1057,7 +1083,9 @@ ActiveRecord::Schema.define(version: 2021_06_18_154526) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "position", default: 0
+    t.integer "store_id"
     t.index ["position"], name: "index_spree_taxonomies_on_position"
+    t.index ["store_id"], name: "index_spree_taxonomies_on_store_id"
   end
 
   create_table "spree_taxons", force: :cascade do |t|
